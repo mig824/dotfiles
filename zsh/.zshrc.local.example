@@ -1,0 +1,15 @@
+# Machine-specific config — copy to ~/.zshrc.local and customize
+# This file is NOT committed to the repo
+
+# Example: Dropbox devbox
+# alias ghd='gh dbx'
+# alias cdx='codex -c disable_response_storage=true --full-auto'
+# export PATH="/usr/local/engtools/linux/bin:$PATH"
+# export PATH="/usr/local/engtools/common/bin:$PATH"
+# export PATH="$HOME/go/godev/bin:$PATH"
+# function reset-claude-auth {
+#     bash -lc "$(jq -r '.awsAuthRefresh' ~/.claude/settings.json)"
+# }
+
+# Example: macOS
+# export PATH="/opt/homebrew/bin:$PATH"

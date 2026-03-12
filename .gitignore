@@ -1,0 +1,4 @@
+*.local
+.secrets
+nvim/plugin/
+nvim/.luarc.json

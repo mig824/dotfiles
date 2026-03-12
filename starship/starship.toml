@@ -1,0 +1,52 @@
+# Minimal starship config — show what matters, hide what doesn't
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$python\
+$golang\
+$character"""
+
+# Prompt character — green on success, red on error
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](bold red)"
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+symbol = " "
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+
+[python]
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+symbol = " "
+
+[golang]
+format = "[$symbol($version )]($style)"
+symbol = " "
+
+# Disable modules we don't need
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[package]
+disabled = true
+
+[docker_context]
+disabled = true
+
+[rust]
+disabled = true
