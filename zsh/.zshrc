@@ -2,13 +2,19 @@
 zstyle ':znap:*' repos-dir ~/.zsh-snap/plugins
 source ~/.zsh-snap/znap.zsh
 
+# Completions (must be before fzf-tab)
+autoload -Uz compinit && compinit
+
 # Plugins
 znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-syntax-highlighting
 znap source rupa/z
+znap source Aloxaf/fzf-tab
+znap source zsh-users/zsh-history-substring-search
 
-# Completions
-autoload -Uz compinit && compinit
+# History substring search keybindings
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # Preferred editor
 export EDITOR='nvim'
