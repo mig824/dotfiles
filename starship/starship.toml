@@ -1,14 +1,11 @@
-# Minimal starship config — show what matters, hide what doesn't
+# Clean minimal — directory + branch on top, arrow below
 
 format = """
 $directory\
 $git_branch\
-$git_status\
-$python\
-$golang\
+$git_status
 $character"""
 
-# Prompt character — green on success, red on error
 [character]
 success_symbol = "[➜](bold green)"
 error_symbol = "[➜](bold red)"
@@ -18,21 +15,18 @@ truncation_length = 3
 truncate_to_repo = true
 
 [git_branch]
-format = "[$symbol$branch]($style) "
-symbol = " "
+format = "[$branch]($style) "
 
 [git_status]
-format = '([$all_status$ahead_behind]($style) )'
+format = '([$all_status$ahead_behind]($style))'
 
+# Disable everything else
 [python]
-format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
-symbol = " "
+disabled = true
 
 [golang]
-format = "[$symbol($version )]($style)"
-symbol = " "
+disabled = true
 
-# Disable modules we don't need
 [aws]
 disabled = true
 
