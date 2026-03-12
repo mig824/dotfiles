@@ -1,10 +1,16 @@
 # Clean minimal — directory + branch on top, arrow below
 
 format = """
+$hostname\
 $directory\
 $git_branch\
 $git_status
 $character"""
+
+[hostname]
+ssh_only = false
+format = "[$hostname]($style) "
+style = "bold #FF8800"
 
 [character]
 success_symbol = "[➜](bold green)"
