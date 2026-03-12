@@ -8,7 +8,6 @@ Personal dev environment config — nvim, tmux, zsh.
 nvim/                    Neovim config (AstroNvim v5)
 tmux/.tmux.conf          Tmux config
 zsh/.zshrc               Portable zsh config (znap + starship)
-zsh/.zsh_functions       Shell functions (Claude Code + tmux workflows)
 zsh/.zshrc.local.example Template for machine-specific config
 starship/starship.toml   Starship prompt config
 install.sh               Automated setup script
@@ -17,7 +16,7 @@ install.sh               Automated setup script
 ## Quick start
 
 ```bash
-git clone git@github.com:YOUR_USER/dotfiles.git ~/dotfiles
+git clone git@github.com:mig824/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ./install.sh
 ```
@@ -65,7 +64,6 @@ Open tmux and press `prefix + I` to install plugins.
 | File | Purpose |
 |------|---------|
 | `zsh/.zshrc` | Shell config that works on any machine |
-| `zsh/.zsh_functions` | tmux + Claude Code helper functions |
 | `tmux/.tmux.conf` | Tmux config with platform-aware status bar |
 | `starship/starship.toml` | Starship prompt config |
 | `nvim/` | Full AstroNvim config |
@@ -157,14 +155,3 @@ Nvim plugins may need a `:Lazy sync` after pulling if `lazy-lock.json` changed.
 - **Local (Mac)**: OSC 52 is skipped, nvim uses the native system clipboard
 - **gopls**: Directory filters for the Dropbox monorepo are in `nvim/lua/plugins/gopls.lua` — harmless on Mac (ignored if the dirs don't exist)
 
-## Shell functions
-
-Defined in `zsh/.zsh_functions`:
-
-| Function | Usage | What it does |
-|----------|-------|-------------|
-| `cc` | `cc [name]` | Open Claude Code in a new tmux window |
-| `ccw` | `ccw <branch> [base]` | Create git worktree + open Claude in it |
-| `ccs` | `ccs [name]` | Side-by-side nvim + Claude in tmux split |
-| `ccls` | `ccls` | List tmux windows running Claude |
-| `ccd` | `ccd [base]` | Open diffview for current branch vs base |
