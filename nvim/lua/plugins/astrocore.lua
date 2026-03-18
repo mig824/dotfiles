@@ -109,12 +109,32 @@ return {
         -- Find words scoped to current file's directory
         ["<Leader>fW"] = {
           function()
-            require("telescope.builtin").live_grep({
-              cwd = vim.fn.expand("%:p:h"),
-            })
+            Snacks.picker.grep({ dirs = { vim.fn.expand("%:p:h") } })
           end,
           desc = "Find words in current directory",
         },
+
+        -- Find recent files
+        ["<Leader>fr"] = {
+          function() Snacks.picker.recent() end,
+          desc = "Find recent files",
+        },
+
+        -- Search and replace across quickfix entries
+        ["<Leader>xr"] = {
+          function()
+            local old = vim.fn.input("Search: ")
+            if old == "" then return end
+            local new = vim.fn.input("Replace: ")
+            if new == "" then return end
+            vim.cmd("cdo s/" .. vim.fn.escape(old, "/") .. "/" .. vim.fn.escape(new, "/") .. "/g | update")
+            vim.notify("Replaced '" .. old .. "' → '" .. new .. "' in quickfix files")
+          end,
+          desc = "Replace in quickfix list",
+        },
+
+        -- Clear quickfix list
+        ["<Leader>xc"] = { "<cmd>cexpr []<cr>", desc = "Clear quickfix list" },
       },
       v = {
         -- Move selected lines up/down
