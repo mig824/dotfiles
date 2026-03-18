@@ -70,8 +70,9 @@ return {
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
         ["<Leader>by"] = {
           function()
-            vim.cmd('let @+ = expand("%")')
-            vim.notify("Copied: " .. vim.fn.expand("%"))
+            local path = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":.")
+            vim.fn.setreg("+", path)
+            vim.notify("Copied: " .. path)
           end,
           desc = "Copy relative path",
         },
