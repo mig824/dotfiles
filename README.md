@@ -129,6 +129,12 @@ Nvim plugins may need a `:Lazy sync` after pulling if `lazy-lock.json` changed.
 | `]a` / `[a` | Next/previous parameter |
 | `<Leader>a` / `<Leader>A` | Swap parameter next/previous |
 
+**Search:**
+| Key | Action |
+|-----|--------|
+| `<Leader>fw` | Find words (global) |
+| `<Leader>fW` | Find words (current file's directory) |
+
 **Buffer/file:**
 | Key | Action |
 |-----|--------|

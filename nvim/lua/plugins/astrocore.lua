@@ -105,6 +105,16 @@ return {
 
         -- Select last pasted text
         ["gp"] = { "`[v`]", desc = "Select last pasted text" },
+
+        -- Find words scoped to current file's directory
+        ["<Leader>fW"] = {
+          function()
+            require("telescope.builtin").live_grep({
+              cwd = vim.fn.expand("%:p:h"),
+            })
+          end,
+          desc = "Find words in current directory",
+        },
       },
       v = {
         -- Move selected lines up/down
