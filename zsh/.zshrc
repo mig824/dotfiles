@@ -38,6 +38,30 @@ alias gcof='git branch --sort=-committerdate | fzf --preview "git log --oneline 
 alias gaf='git ls-files -m -o --exclude-standard | fzf -m --preview "git diff --color=always {}" | xargs git add'
 alias glf='git log --format="%h %an (%al): %s" --since="2 weeks ago" | fzf | cut -d" " -f1 | xargs -r git rev-parse | tr -d "\n" | { read h; [ -n "$h" ] && printf "\e]52;c;%s\a" "$(echo -n "$h" | base64)" >/dev/tty && echo "$h copied"; }'
 alias fkill='ps -ef | sed 1d | fzf -m | awk "{print \$2}" | xargs kill -9'
+# Mini file manager — preview pane, Enter opens file/enters dir, Esc quits
+lf() {
+  local bat_cmd
+  if command -v batcat &>/dev/null; then bat_cmd=batcat
+  elif command -v bat &>/dev/null; then bat_cmd=bat
+  fi
+  local dir="${1:-.}"
+  while true; do
+    local preview="f='$dir/{}'; if [ -d \"\$f\" ]; then tree -C -L 2 \"\$f\" 2>/dev/null; elif [ -n '$bat_cmd' ]; then $bat_cmd --color=always --style=numbers --line-range=:100 \"\$f\" 2>/dev/null || file \"\$f\"; else head -80 \"\$f\" 2>/dev/null || file \"\$f\"; fi"
+    local sel
+    sel=$(ls -Ap "$dir" | fzf \
+      --preview "$preview" \
+      --preview-window=right:50% \
+      --header "$dir — Enter: open/cd | Esc: quit") || return
+    [[ -z "$sel" ]] && return
+    if [[ -d "$dir/$sel" ]]; then
+      dir="$dir/$sel"
+    else
+      ${EDITOR:-nvim} "$dir/$sel"
+      return
+    fi
+  done
+}
+
 alias ..='cd ..'
 alias ...='cd ../..'
 
@@ -67,8 +91,14 @@ elif command -v fd &>/dev/null; then
   export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 fi
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_OPTS="--preview 'head -100 {}'"
-export FZF_ALT_C_OPTS="--preview 'ls -la {}'"
+if command -v batcat &>/dev/null; then
+  export FZF_CTRL_T_OPTS="--preview 'batcat --color=always --style=numbers --line-range=:100 {}'"
+elif command -v bat &>/dev/null; then
+  export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:100 {}'"
+else
+  export FZF_CTRL_T_OPTS="--preview 'head -100 {}'"
+fi
+export FZF_ALT_C_OPTS="--preview 'tree -C -L 2 {} 2>/dev/null || ls -la {}'"
 
 # Source custom configs if they exist
 [[ -f ~/.zsh_functions ]] && source ~/.zsh_functions
