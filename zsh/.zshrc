@@ -34,6 +34,10 @@ alias gco='git checkout'
 alias gp='git push'
 alias gl='git log --oneline --graph --decorate'
 alias gsi='git switch $(git branch | fzf)'
+alias gcof='git branch --sort=-committerdate | fzf --preview "git log --oneline -10 {}" | xargs git switch'
+alias gaf='git ls-files -m -o --exclude-standard | fzf -m --preview "git diff --color=always {}" | xargs git add'
+alias glf='git log --format="%h %an (%al): %s" --since="2 weeks ago" | fzf | cut -d" " -f1 | xargs -r git rev-parse | tr -d "\n" | { read h; [ -n "$h" ] && printf "\e]52;c;%s\a" "$(echo -n "$h" | base64)" >/dev/tty && echo "$h copied"; }'
+alias fkill='ps -ef | sed 1d | fzf -m | awk "{print \$2}" | xargs kill -9'
 alias ..='cd ..'
 alias ...='cd ../..'
 
@@ -49,6 +53,22 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # FZF integration (if installed via Homebrew or otherwise)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# FZF defaults — gruvbox colors, reverse layout, fd for file finding
+export FZF_DEFAULT_OPTS='
+  --height=40% --layout=reverse --border
+  --color=bg+:#3c3836,bg:#282828,spinner:#fb4934,hl:#928374
+  --color=fg:#ebdbb2,header:#928374,info:#8ec07c,pointer:#fb4934
+  --color=fg+:#ebdbb2,marker:#fb4934,prompt:#fabd2f,hl+:#fb4934
+'
+if command -v fdfind &>/dev/null; then
+  export FZF_DEFAULT_COMMAND='fdfind --type f --hidden --follow --exclude .git'
+elif command -v fd &>/dev/null; then
+  export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+fi
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--preview 'head -100 {}'"
+export FZF_ALT_C_OPTS="--preview 'ls -la {}'"
 
 # Source custom configs if they exist
 [[ -f ~/.zsh_functions ]] && source ~/.zsh_functions
