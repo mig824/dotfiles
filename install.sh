@@ -16,7 +16,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     echo "Error: Homebrew not found. Install it first: https://brew.sh" >&2
     exit 1
   fi
-  for pkg in neovim tmux fzf fd bat; do
+  for pkg in neovim tmux fzf fd bat tree; do
     if brew list "$pkg" &>/dev/null; then
       skip "$pkg"
     else
@@ -26,7 +26,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
   done
 else
   pkgs=()
-  for pkg in neovim tmux fzf fd-find bat; do
+  for pkg in neovim tmux fzf fd-find bat tree; do
     if dpkg -s "$pkg" &>/dev/null 2>&1; then
       skip "$pkg"
     else
