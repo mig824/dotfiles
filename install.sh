@@ -48,6 +48,10 @@ ln -sfn "$DOTFILES/nvim" "$HOME/.config/nvim"
 ln -sf "$DOTFILES/tmux/.tmux.conf" "$HOME/.tmux.conf"
 ln -sf "$DOTFILES/zsh/.zshrc" "$HOME/.zshrc"
 ln -sf "$DOTFILES/starship/starship.toml" "$HOME/.config/starship.toml"
+if [[ "$(uname)" == "Darwin" ]]; then
+  mkdir -p "$HOME/Library/Application Support/com.mitchellh.ghostty"
+  ln -sf "$DOTFILES/ghostty/config" "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
+fi
 info "Symlinks created"
 
 # --- Starship ---
