@@ -22,10 +22,12 @@ cd ~/dotfiles
 ```
 
 The install script automatically:
+- Installs dependencies: neovim, tmux, fzf, fd, bat (via brew or apt)
 - Creates symlinks for all configs
 - Installs [starship](https://starship.rs) prompt
 - Installs [znap](https://github.com/marlonrichert/zsh-snap) plugin manager
 - Installs [TPM](https://github.com/tmux-plugins/tpm) for tmux
+- Syncs nvim plugins headlessly (AstroNvim + Lazy)
 - Creates `~/.secrets` with locked permissions
 
 Zsh plugins (autosuggestions, syntax highlighting, z) are auto-cloned by znap on first shell load.
@@ -94,7 +96,7 @@ Nvim plugins may need a `:Lazy sync` after pulling if `lazy-lock.json` changed.
 
 ## FZF integration
 
-Requires [fzf](https://github.com/juneguez/fzf) installed. Colors are gruvbox-matched, file finding uses `fd` when available.
+Colors are gruvbox-matched. File finding uses `fd`, previews use `bat` with syntax highlighting.
 
 **Shell aliases:**
 | Alias | Action |
@@ -104,13 +106,14 @@ Requires [fzf](https://github.com/juneguez/fzf) installed. Colors are gruvbox-ma
 | `gaf` | Fuzzy stage files (multi-select with Tab, diff preview) |
 | `glf` | Fuzzy browse last 2 weeks of commits → copies full SHA to clipboard |
 | `fkill` | Fuzzy kill processes (multi-select with Tab) |
+| `lf [dir]` | Mini file manager with bat/tree preview pane |
 
 **Built-in fzf keybindings** (from `~/.fzf.zsh`):
 | Key | Action |
 |-----|--------|
 | `Ctrl-R` | Fuzzy shell history search |
-| `Ctrl-T` | Fuzzy file path (with preview) |
-| `Alt-C` | Fuzzy cd into directory |
+| `Ctrl-T` | Fuzzy file path (bat preview) |
+| `Alt-C` | Fuzzy cd into directory (tree preview) |
 
 **Tmux:**
 | Key | Action |
