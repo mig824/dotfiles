@@ -92,6 +92,31 @@ git pull
 
 Nvim plugins may need a `:Lazy sync` after pulling if `lazy-lock.json` changed.
 
+## FZF integration
+
+Requires [fzf](https://github.com/juneguez/fzf) installed. Colors are gruvbox-matched, file finding uses `fd` when available.
+
+**Shell aliases:**
+| Alias | Action |
+|-------|--------|
+| `gsi` | Fuzzy switch branch |
+| `gcof` | Fuzzy switch branch (sorted by most recent) |
+| `gaf` | Fuzzy stage files (multi-select with Tab, diff preview) |
+| `glf` | Fuzzy browse last 2 weeks of commits → copies full SHA to clipboard |
+| `fkill` | Fuzzy kill processes (multi-select with Tab) |
+
+**Built-in fzf keybindings** (from `~/.fzf.zsh`):
+| Key | Action |
+|-----|--------|
+| `Ctrl-R` | Fuzzy shell history search |
+| `Ctrl-T` | Fuzzy file path (with preview) |
+| `Alt-C` | Fuzzy cd into directory |
+
+**Tmux:**
+| Key | Action |
+|-----|--------|
+| `Prefix + f` | Fuzzy switch to any window across all sessions |
+
 ## Neovim setup details
 
 ### Plugins
