@@ -10,6 +10,7 @@ tmux/.tmux.conf          Tmux config
 zsh/.zshrc               Portable zsh config (znap + starship)
 zsh/.zshrc.local.example Template for machine-specific config
 starship/starship.toml   Starship prompt config
+ghostty/config           Ghostty terminal config (macOS only)
 install.sh               Automated setup script
 ```
 
