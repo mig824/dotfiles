@@ -9,6 +9,38 @@ skip() { echo "  [-] $1 (already installed)"; }
 echo "=== Installing dotfiles ==="
 echo ""
 
+# --- Dependencies ---
+echo "Installing dependencies..."
+if [[ "$(uname)" == "Darwin" ]]; then
+  if ! command -v brew &>/dev/null; then
+    echo "Error: Homebrew not found. Install it first: https://brew.sh" >&2
+    exit 1
+  fi
+  for pkg in neovim tmux fzf fd; do
+    if brew list "$pkg" &>/dev/null; then
+      skip "$pkg"
+    else
+      info "Installing $pkg..."
+      brew install "$pkg"
+    fi
+  done
+else
+  pkgs=()
+  for pkg in neovim tmux fzf fd-find; do
+    if dpkg -s "$pkg" &>/dev/null 2>&1; then
+      skip "$pkg"
+    else
+      pkgs+=("$pkg")
+    fi
+  done
+  if [[ ${#pkgs[@]} -gt 0 ]]; then
+    info "Installing ${pkgs[*]}..."
+    sudo apt-get update -qq
+    sudo apt-get install -y -qq "${pkgs[@]}"
+  fi
+fi
+echo ""
+
 # --- Symlinks ---
 echo "Linking configs..."
 mkdir -p "$HOME/.config"
@@ -43,6 +75,11 @@ else
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
+# --- Neovim plugins (AstroNvim + Lazy) ---
+info "Syncing nvim plugins (headless)..."
+nvim --headless "+Lazy! sync" +qa 2>/dev/null
+info "Nvim plugins synced"
+
 # --- Secrets file ---
 if [[ ! -f "$HOME/.secrets" ]]; then
   touch "$HOME/.secrets"
@@ -59,6 +96,5 @@ echo ""
 echo "Remaining manual steps:"
 echo "  1. Add API keys to ~/.secrets"
 echo "  2. Create ~/.zshrc.local with machine-specific config (see zsh/.zshrc.local.example)"
-echo "  3. Open nvim and run :Lazy sync"
-echo "  4. Open tmux and press prefix + I to install plugins"
-echo "  5. Open a new shell to load everything"
+echo "  3. Open tmux and press prefix + I to install plugins"
+echo "  4. Open a new shell to load everything"
