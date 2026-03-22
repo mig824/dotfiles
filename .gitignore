@@ -2,3 +2,4 @@
 .secrets
 nvim/plugin/
 nvim/.luarc.json
+nvim/lua/plugins/gopls.lua
