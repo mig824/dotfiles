@@ -8,7 +8,7 @@ autoload -Uz compinit && compinit
 # Plugins
 znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-syntax-highlighting
-znap source rupa/z
+eval "$(zoxide init zsh)"
 znap source Aloxaf/fzf-tab
 znap source zsh-users/zsh-history-substring-search
 
