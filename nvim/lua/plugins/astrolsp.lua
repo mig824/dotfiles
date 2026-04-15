@@ -37,6 +37,31 @@ return {
     },
     mappings = {
       n = {
+        grr = {
+          function() Snacks.picker.lsp_references() end,
+          desc = "References (Snacks)",
+          cond = "textDocument/references",
+        },
+        gri = {
+          function() Snacks.picker.lsp_implementations() end,
+          desc = "Implementations (Snacks)",
+          cond = "textDocument/implementation",
+        },
+        gd = {
+          function() Snacks.picker.lsp_definitions() end,
+          desc = "Definitions (Snacks)",
+          cond = "textDocument/definition",
+        },
+        gy = {
+          function() Snacks.picker.lsp_type_definitions() end,
+          desc = "Type Definitions (Snacks)",
+          cond = "textDocument/typeDefinition",
+        },
+        gO = {
+          function() Snacks.picker.lsp_symbols() end,
+          desc = "Document Symbols (Snacks)",
+          cond = "textDocument/documentSymbol",
+        },
         gD = {
           function() vim.lsp.buf.declaration() end,
           desc = "Declaration of current symbol",
