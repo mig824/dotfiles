@@ -23,7 +23,6 @@ return {
     servers = {},
     ---@diagnostic disable: missing-fields
     config = {},
-    handlers = {},
     autocmds = {
       lsp_codelens_refresh = {
         cond = "textDocument/codeLens",
@@ -52,6 +51,5 @@ return {
         },
       },
     },
-    on_attach = function(client, bufnr) end,
   },
 }

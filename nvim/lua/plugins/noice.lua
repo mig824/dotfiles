@@ -6,5 +6,8 @@ return {
     cmdline = {
       view = "cmdline_popup",
     },
+    health = {
+      checker = false,
+    },
   },
 }
