@@ -75,9 +75,6 @@ autoload -U colors && colors
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-# FZF integration (if installed via Homebrew or otherwise)
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # FZF defaults — gruvbox colors, reverse layout, fd for file finding
 export FZF_DEFAULT_OPTS='
   --height=40% --layout=reverse --border
@@ -109,6 +106,9 @@ export FZF_ALT_C_OPTS="--preview 'tree -C -L 2 {} 2>/dev/null || ls -la {}'"
 
 # Secrets (API keys — not committed, chmod 600)
 [[ -f ~/.secrets ]] && source ~/.secrets
+
+# FZF integration (must be after .zshrc.local so ~/.fzf/bin wins over /usr/bin)
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Prompt (must be last — starship hooks into precmd)
 eval "$(starship init zsh)"
