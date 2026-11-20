@@ -97,7 +97,7 @@ Nvim plugins may need a `:Lazy sync` after pulling if `lazy-lock.json` changed.
 
 ## FZF integration
 
-Colors are gruvbox-matched. File finding uses `fd`, previews use `bat` with syntax highlighting.
+Colors are srcery-matched. File finding uses `fd`, previews use `bat` with syntax highlighting.
 
 **Shell aliases:**
 | Alias | Action |
@@ -129,7 +129,7 @@ Colors are gruvbox-matched. File finding uses `fd`, previews use `bat` with synt
 - **Git**: diffview.nvim, gitsigns.nvim
 - **Diagnostics**: trouble.nvim
 - **File management**: oil.nvim (neo-tree disabled)
-- **UI**: gruvbox (hard contrast), noice.nvim (centered cmdline), custom heirline statusline
+- **UI**: srcery, noice.nvim (centered cmdline), custom heirline statusline
 
 ### Key mappings
 

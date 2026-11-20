@@ -10,7 +10,7 @@ $character"""
 [hostname]
 ssh_only = false
 format = "[$hostname]($style) "
-style = "bold #FF8800"
+style = "bold #ff5f00"
 
 [character]
 success_symbol = "[➜](bold green)"

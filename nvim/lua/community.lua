@@ -12,5 +12,4 @@ return {
   { import = "astrocommunity.diagnostics.trouble-nvim" },
   { import = "astrocommunity.editing-support.yanky-nvim" },
   { import = "astrocommunity.file-explorer.oil-nvim" },
-  { import = "astrocommunity.colorscheme.gruvbox-nvim" },
 }

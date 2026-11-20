@@ -76,13 +76,15 @@ autoload -U colors && colors
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-# FZF defaults — gruvbox colors, reverse layout, fd for file finding
+# FZF defaults — srcery colors, reverse layout, fd for file finding
 export FZF_DEFAULT_OPTS='
   --height=40% --layout=reverse --border
-  --color=bg+:#3c3836,bg:#282828,spinner:#fb4934,hl:#928374
-  --color=fg:#ebdbb2,header:#928374,info:#8ec07c,pointer:#fb4934
-  --color=fg+:#ebdbb2,marker:#fb4934,prompt:#fabd2f,hl+:#fb4934
+  --color=bg+:#262626,bg:#1c1b19,spinner:#ef2f27,hl:#918175
+  --color=fg:#fce8c3,header:#918175,info:#0aaeb3,pointer:#ef2f27
+  --color=fg+:#fce8c3,marker:#ef2f27,prompt:#fbb829,hl+:#ef2f27
 '
+# bat follows the terminal's ANSI palette (srcery via Ghostty)
+export BAT_THEME=ansi
 if command -v fdfind &>/dev/null; then
   export FZF_DEFAULT_COMMAND='fdfind --type f --hidden --follow --exclude .git'
 elif command -v fd &>/dev/null; then
