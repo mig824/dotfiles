@@ -3,7 +3,7 @@ zstyle ':znap:*' repos-dir ~/.zsh-snap/plugins
 source ~/.zsh-snap/znap.zsh
 
 # Completions (must be before fzf-tab)
-autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit -u
 
 # Plugins
 znap source zsh-users/zsh-autosuggestions
@@ -39,6 +39,7 @@ alias gaf='git ls-files -m -o --exclude-standard | fzf -m --preview "git diff --
 alias glf='git log --format="%h %an (%al): %s" --since="2 weeks ago" | fzf | cut -d" " -f1 | xargs -r git rev-parse | tr -d "\n" | { read h; [ -n "$h" ] && printf "\e]52;c;%s\a" "$(echo -n "$h" | base64)" >/dev/tty && echo "$h copied"; }'
 alias fkill='ps -ef | sed 1d | fzf -m | awk "{print \$2}" | xargs kill -9'
 alias hermes='docker exec -it hermes hermes'
+alias cc='claude'
 # Mini file manager — preview pane, Enter opens file/enters dir, Esc quits
 lf() {
   local bat_cmd
@@ -66,8 +67,8 @@ lf() {
 alias ..='cd ..'
 alias ...='cd ../..'
 
-# PATH additions
-export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:$PATH"
+# PATH additions (homebrew first for newer python3)
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:$PATH"
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$PATH:$HOME/.npm-global/bin"
 

@@ -1,10 +1,16 @@
 # Clean minimal — directory + branch on top, arrow below
+# Only modules listed in `format` render, so no need to disable the rest.
+
+command_timeout = 3000
 
 format = """
 $hostname\
 $directory\
 $git_branch\
-$git_status
+$git_state\
+$cmd_duration\
+$jobs\
+$status
 $character"""
 
 [hostname]
@@ -23,30 +29,23 @@ truncate_to_repo = true
 [git_branch]
 format = "[$branch]($style) "
 
-[git_status]
-format = '([$all_status$ahead_behind]($style))'
+# Cheap: reads .git/ state files, no working-tree scan.
+[git_state]
+format = '([$state( $progress_current/$progress_total)]($style)) '
+style = "bold yellow"
 
-# Disable everything else
-[python]
-disabled = true
+# Only shows for commands slower than min_time.
+[cmd_duration]
+min_time = 2000
+format = "[$duration]($style) "
+style = "bold yellow"
 
-[golang]
-disabled = true
+[jobs]
+format = "[$symbol$number]($style) "
+symbol = "⚙ "
+style = "bold blue"
 
-[aws]
-disabled = true
-
-[gcloud]
-disabled = true
-
-[nodejs]
-disabled = true
-
-[package]
-disabled = true
-
-[docker_context]
-disabled = true
-
-[rust]
-disabled = true
+[status]
+disabled = false
+format = "[$status]($style) "
+style = "bold red"
